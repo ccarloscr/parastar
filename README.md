@@ -1,9 +1,9 @@
-# READ-ME
+# README
 
 Simple script used to map paired-end fastq files to the dm6 Drosophila genome using STAR.
 
 
-## Instalation
+## Installation
 
 First, install STAR using mamba:
 ```bash
