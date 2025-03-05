@@ -5,13 +5,21 @@
 # Version: ***
 # This script uses STAR to map paired-end reads to Drosophila dm6 genome
 
+#SBATCH --job-name=star_mapping   # Job name
+#SBATCH --partition=irbio01       # Slurm queue
+#SBATCH --nodes=1                 # Number of nodes
+#SBATCH --ntasks=1                # Number of tasks
+#SBATCH --cpus-per-task=12        # CPUs per task
+#SBATCH --output=chipseq_%j.out   # Output log file
+#SBATCH --error=chipseq_%j.err    # Error log file
+
 set -e
 
 ## Variable set up
-FASTQ_DIR = "rnaseq/fastq_files"
-GENOME_FASTA = "rnaseq/genome/dm6.fasta"
-GENOME_INDEX = "rnaseq/genome/dm6_index"
-OUTPUT_DIR = "rnaseq/STAR_results"
+FASTQ_DIR = "star_mapping/fastq_files"
+GENOME_FASTA = "star_mapping/dm6/dm6.fasta"
+GENOME_INDEX = "star_mapping/dm6/dm6_index"
+OUTPUT_DIR = "star_mapping/Results"
 THREADS = 12
 
 ## Create output folder
