@@ -3,15 +3,15 @@
 # Author: Carlos Camilleri-Robles
 # Contact: carloscamilleri@hotmail.com
 # Version: Not tested yet
-# This script uses STAR to map paired-end reads to a reference genome
+# This script uses GNU Parallel and STAR to map paired-end reads to a reference genome
 
-#SBATCH --job-name=star_mapping   # Job name
+#SBATCH --job-name=parastar       # Job name
 #SBATCH --partition=irbio01       # Slurm queue
 #SBATCH --nodes=1                 # Number of nodes
 #SBATCH --ntasks=1                # Number of tasks
 #SBATCH --cpus-per-task=12        # CPUs per task
-#SBATCH --output=chipseq_%j.out   # Output log file
-#SBATCH --error=chipseq_%j.err    # Error log file
+#SBATCH --output=parastar_%j.out  # Output log file
+#SBATCH --error=parastar_%j.err   # Error log file
 
 set -e
 
@@ -19,11 +19,11 @@ set -e
 mamba activate star_env
 
 ## Variable set up
-FASTQ_DIR="star_mapping/fastq_files"
-GENOME_FASTA="star_mapping/Genomes/dm6/dm6.fasta"
-GENOME_INDEX="star_mapping/Genomes/dm6/dm6_index"
-GTF_DIR="star_mapping/Genomes/dm6/dmel-all-r6.62.gtf"
-OUTPUT_DIR="star_mapping/Results"
+FASTQ_DIR="parastar/fastq_files"
+GENOME_FASTA="parastar/Genomes/dm6/dm6.fasta"
+GENOME_INDEX="parastar/Genomes/dm6/dm6_index"
+GTF_DIR="parastar/Genomes/dm6/dmel-all-r6.62.gtf"
+OUTPUT_DIR="parastar/Results"
 THREADS=12
 
 ## Create output folder
