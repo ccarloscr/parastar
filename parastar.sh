@@ -25,7 +25,7 @@ GENOME_FASTA="parastar/Genomes/dm6/dm6.fa"
 GENOME_INDEX="parastar/Genomes/dm6/dm6_index"
 GTF_DIR="parastar/Genomes/dm6/dmel-all-r6.62.gtf"
 OUTPUT_DIR="parastar/Results"
-NUM_FASTQ=$(find "$FASTQ_DIR" -name "*_read1.fastq" | wc -l)
+NUM_FASTQ=$(find "$FASTQ_DIR" -name "*_R1_001.fastq.gz" | wc -l)
 THREADS=12
 
 ## Create output folder
@@ -77,8 +77,8 @@ echo "Initializing mapping of FASTQ files..."
 mapping() {
     read1=$1
     threads_per_job=$2
-    sample_id=$(basename "$read1" | sed 's/_read1.fastq//')
-    read2="$FASTQ_DIR/${sample_id}_read2.fastq"
+    sample_id=$(basename "$read1" | sed 's/_R1_001.fastq.gz//')
+    read2="$FASTQ_DIR/${sample_id}_R2_001.fastq.gz"
     
     if [ -f "$read2" ]; then
         echo "Processing $sample_id using $threads_per_job threads..."
@@ -101,5 +101,5 @@ export FASTQ_DIR GENOME_INDEX OUTPUT_DIR threads_per_job
 
 
 ## Use Parallel for the mapping
-find "$FASTQ_DIR" -name "*_read1.fastq" | parallel -j "$JOBS" mapping {}
+find "$FASTQ_DIR" -name "*_R1_001.fastq.gz" | parallel -j "$JOBS" mapping {}
 
