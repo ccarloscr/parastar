@@ -78,6 +78,13 @@ else
 fi
 
 
+## Check that threads_per_job is correctly set
+if [ -z "$threads_per_job" ] || [ "$threads_per_job" -le 0 ]; then
+    echo "ERROR: Invalid value for threads_per_job."
+    exit 1
+fi
+
+
 ## Define the mapping function
 echo "Initializing mapping of FASTQ files..."
 mapping() {
@@ -107,5 +114,5 @@ export FASTQ_DIR GENOME_INDEX OUTPUT_DIR threads_per_job
 
 
 ## Use Parallel for the mapping
-find "$FASTQ_DIR" -name "*_R1_001.fastq.gz" | parallel -j "$JOBS" mapping {}
+find "$FASTQ_DIR" -name "*_R1_001.fastq.gz" | parallel -j "$JOBS" mapping {} "$threads_per_job"
 
