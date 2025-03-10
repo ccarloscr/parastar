@@ -6,12 +6,12 @@ Default parameters are defined for _Drosophila melanogaster_ dm6 genome.
 
 ## Installation
 
-### Install STAR using mamba
+First, install STAR using mamba
 ```bash
 mamba create -n star_env -c bioconda -c conda-forge star
 ```
 
-### Clone this repository
+Then, clone this repository
 ```bash
 git clone https://github.com/ccarloscr/star_mapping.git
 cd star_mapping
