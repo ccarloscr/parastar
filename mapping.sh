@@ -19,12 +19,12 @@ set -e
 mamba activate star_env
 
 ## Variable set up
-FASTQ_DIR = "star_mapping/fastq_files"
-GENOME_FASTA = "star_mapping/Genomes/dm6/dm6.fasta"
-GENOME_INDEX = "star_mapping/Genomes/dm6/dm6_index"
-GTF_DIR = "star_mapping/Genomes/dm6/dmel-all-r6.62.gtf"
-OUTPUT_DIR = "star_mapping/Results"
-THREADS = 12
+FASTQ_DIR="star_mapping/fastq_files"
+GENOME_FASTA="star_mapping/Genomes/dm6/dm6.fasta"
+GENOME_INDEX="star_mapping/Genomes/dm6/dm6_index"
+GTF_DIR="star_mapping/Genomes/dm6/dmel-all-r6.62.gtf"
+OUTPUT_DIR="star_mapping/Results"
+THREADS=12
 
 ## Create output folder
 mkdir -p "$OUTPUT_DIR"
@@ -41,9 +41,9 @@ fi
 
 # Mapping reads to reference genome
 echo "Initializing mapping of FASTQ files..."
-for read1 in "$FASTQ_DIR"/_read1.fast1; do
-    sample_id = $(basename "$read1" | sed 's/_read1.fastq//')
-    read2 = "$FASTQ_DIR/${sample_id}_read2.fastq"
+for read1 in "$FASTQ_DIR"/*_read1.fastq; do
+    sample_id=$(basename "$read1" | sed 's/_read1.fastq//')
+    read2="$FASTQ_DIR/${sample_id}_read2.fastq"
     if [ -f "$read2" ]; then
         echo "Processing $sample_id..."
         STAR    --runThreadN $THREADS \
@@ -52,7 +52,7 @@ for read1 in "$FASTQ_DIR"/_read1.fast1; do
                 --outFileNamePrefix "$OUTPUT_DIR/${sample_id}_" \
                 --outSAMtype BAM SortedByCoordinate
     else
-        echo "ERROR: No $read2 file for $sample_id"
+        echo "ERROR: No read2 file for $sample_id"
     fi
 done
 
