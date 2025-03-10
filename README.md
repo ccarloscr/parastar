@@ -1,20 +1,20 @@
-# star_mapping
+# parastar
 
-Simple script used to map paired-end fastq files to reference genome using STAR.
+Bash script using GNU Parallel and STAR to map paired-end fastq files to reference genome using STAR.
 Default parameters are defined for _Drosophila melanogaster_ dm6 genome.
 
 
 ## Installation
 
-First, install STAR using mamba:
+First, install GNU Parallel and STAR using mamba:
 ```bash
 mamba create -n star_env -c bioconda -c conda-forge star
 ```
 
 Then, clone this repository:
 ```bash
-git clone https://github.com/ccarloscr/star_mapping.git
-cd star_mapping
+git clone https://github.com/ccarloscr/parastar.git
+cd parastar
 ```
 
 ### Download the fasta and gtf files of the reference genome
