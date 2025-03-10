@@ -21,7 +21,7 @@ conda activate star_env
 
 ## Variable set up
 FASTQ_DIR="parastar/fastq_files"
-GENOME_FASTA="parastar/Genomes/dm6/dm6.fasta"
+GENOME_FASTA="parastar/Genomes/dm6/dm6.fa"
 GENOME_INDEX="parastar/Genomes/dm6/dm6_index"
 GTF_DIR="parastar/Genomes/dm6/dmel-all-r6.62.gtf"
 OUTPUT_DIR="parastar/Results"
