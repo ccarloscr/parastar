@@ -8,7 +8,8 @@ Default parameters are defined for _Drosophila melanogaster_ dm6 genome.
 
 First, install GNU Parallel and STAR using mamba:
 ```bash
-mamba create -n star_env -c bioconda -c conda-forge star
+mamba create -n star_env -c bioconda -c conda-forge star parallel
+conda activate star_env
 ```
 
 Then, clone this repository:
