@@ -3,7 +3,7 @@
 # Author: Carlos Camilleri-Robles
 # Contact: carloscamilleri@hotmail.com
 # Version: Not tested yet
-# This script uses STAR to map paired-end reads to Drosophila dm6 genome
+# This script uses STAR to map paired-end reads to a reference genome
 
 #SBATCH --job-name=star_mapping   # Job name
 #SBATCH --partition=irbio01       # Slurm queue
@@ -15,26 +15,31 @@
 
 set -e
 
+## Activate mamba environment
+mamba activate star_env
+
 ## Variable set up
 FASTQ_DIR = "star_mapping/fastq_files"
-GENOME_FASTA = "star_mapping/dm6/dm6.fasta"
-GENOME_INDEX = "star_mapping/dm6/dm6_index"
+GENOME_FASTA = "star_mapping/Genomes/dm6/dm6.fasta"
+GENOME_INDEX = "star_mapping/Genomes/dm6/dm6_index"
+GTF_DIR = "star_mapping/Genomes/dm6/dmel-all-r6.62.gtf"
 OUTPUT_DIR = "star_mapping/Results"
 THREADS = 12
 
 ## Create output folder
 mkdir -p "$OUTPUT_DIR"
 
-# Generate dm6 index files
+# Generate genome index files
 if [ ! -d "$GENOME_INDEX" ]; then
-    echo "Generating dm6 genome index..."
+    echo "Generating genome index..."
     STAR    --runThreadN $THREADS \
             --runMode genomeGenerate \
             --genomeDir "$GENOME_INDEX" \
-            --genomeFastaFiles "$genome_fasta"
+            --genomeFastaFiles "$GENOME_FASTA" \
+            --sjdbGTFfile "$GTF_DIR"
 fi
 
-# Mapping reads to dm6
+# Mapping reads to reference genome
 echo "Initializing mapping of FASTQ files..."
 for read1 in "$FASTQ_DIR"/_read1.fast1; do
     sample_id = $(basename "$read1" | sed 's/_read1.fastq//')
