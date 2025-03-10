@@ -1,6 +1,6 @@
 # parastar
 
-Bash script using GNU Parallel and STAR to map paired-end fastq files to reference genome using STAR.
+Bash script using GNU Parallel and STAR to map paired-end fastq.gz files to reference genome using STAR.
 Default parameters are defined for _Drosophila melanogaster_ dm6 genome.
 
 
@@ -36,7 +36,7 @@ gunzip dmel-all-r6.62.gtf.gz
 ```
 
 ## Configuration
-
+The input .fastq files should be placed in a folder named fastq_files.
 
 
 
