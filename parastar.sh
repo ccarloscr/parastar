@@ -86,7 +86,7 @@ mapping() {
                 --genomeDir "$GENOME_INDEX/" \
                 --readFilesIn "$read1" "$read2" \
                 --readFilesCommand gunzip -c \
-                --outFileNamePrefix "$OUTPUT_DIR/${sample_id}_" \
+                --outFileNamePrefix "$OUTPUT_DIR/${sample_id:0:5}_" \
                 --outSAMtype BAM SortedByCoordinate
     else
         echo "WARNING: No read2 file for $sample_id. Skipping sample..."
