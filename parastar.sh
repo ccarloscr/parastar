@@ -32,7 +32,10 @@ THREADS=12
 mkdir -p "$OUTPUT_DIR"
 
 ## Edit the gtf file to match with fasta chromosome naming
-sed -i 's/^\([^ ]*\)/chr\1/' dmel-all-r6.62.gtf
+if ! head -n 1 "$GTF_DIR" | awk '{print $1}' | grep -q '^chr'; then
+    sed -i 's/^\([^ ]*\)/chr\1/' "$GTF_DIR"
+fi
+
 
 ## Check the existence of input directories
 if [ ! -d "$FASTQ_DIR" ]; then
