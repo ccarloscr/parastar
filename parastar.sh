@@ -85,6 +85,7 @@ mapping() {
         STAR    --runThreadN "$threads_per_job" \
                 --genomeDir "$GENOME_INDEX/" \
                 --readFilesIn "$read1" "$read2" \
+                --readFilesCommand gunzip -c \
                 --outFileNamePrefix "$OUTPUT_DIR/${sample_id}_" \
                 --outSAMtype BAM SortedByCoordinate
     else
