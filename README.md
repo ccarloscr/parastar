@@ -17,8 +17,6 @@ git clone https://github.com/ccarloscr/star_mapping.git
 cd star_mapping
 ```
 
-## Configuration
-
 ### Download the fasta and gtf files of the reference genome
 This script uses a reference genome to map fastq files, for which it needs the fasta and the gtf files of the mapped genome. 
 
@@ -36,7 +34,7 @@ wget http://ftp.flybase.org/genomes/dmel/current/gtf/dmel-all-r6.62.gtf.gz
 gunzip dmel-all-r6.62.gtf.gz
 ```
 
-
+## Configuration
 
 
 
