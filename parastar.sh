@@ -20,11 +20,11 @@ source ~/miniconda3/etc/profile.d/conda.sh
 conda activate star_env
 
 ## Variable set up
-FASTQ_DIR="parastar/fastq_files"
-GENOME_FASTA="parastar/Genomes/dm6/dm6.fa"
-GENOME_INDEX="parastar/Genomes/dm6/dm6_index"
-GTF_DIR="parastar/Genomes/dm6/dmel-all-r6.62.gtf"
-OUTPUT_DIR="parastar/Results"
+FASTQ_DIR="fastq_files"
+GENOME_FASTA="Genomes/dm6/dm6.fa"
+GENOME_INDEX="Genomes/dm6/dm6_index"
+GTF_DIR="Genomes/dm6/dmel-all-r6.62.gtf"
+OUTPUT_DIR="Results"
 NUM_FASTQ=$(find "$FASTQ_DIR" -name "*_R1_001.fastq.gz" | wc -l)
 THREADS=12
 
