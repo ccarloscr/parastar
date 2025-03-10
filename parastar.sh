@@ -9,7 +9,7 @@
 #SBATCH --partition=irbio01       # Slurm queue
 #SBATCH --nodes=1                 # Number of nodes
 #SBATCH --ntasks=1                # Number of tasks
-#SBATCH --cpus-per-task=12        # CPUs per task
+#SBATCH --cpus-per-task=24        # CPUs per task
 #SBATCH --output=parastar_%j.out  # Output log file
 #SBATCH --error=parastar_%j.err   # Error log file
 
