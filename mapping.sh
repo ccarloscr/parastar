@@ -2,7 +2,7 @@
 
 # Author: Carlos Camilleri-Robles
 # Contact: carloscamilleri@hotmail.com
-# Version: ***
+# Version: Not tested yet
 # This script uses STAR to map paired-end reads to Drosophila dm6 genome
 
 #SBATCH --job-name=star_mapping   # Job name
