@@ -31,6 +31,9 @@ THREADS=12
 ## Create output folder
 mkdir -p "$OUTPUT_DIR"
 
+## Edit the gtf file to match with fasta chromosome naming
+sed -i 's/^\([^ ]*\)/chr\1/' dmel-all-r6.62.gtf
+
 ## Check the existence of input directories
 if [ ! -d "$FASTQ_DIR" ]; then
     echo "ERROR: FASTQ directory $FASTQ_DIR not found."
@@ -51,7 +54,7 @@ fi
 # Generate genome index files
 if [ ! -d "$GENOME_INDEX" ]; then
     echo "Generating genome index..."
-    STAR    --runThreadN $THREADS \
+    STAR    --runThreadN "$THREADS" \
             --runMode genomeGenerate \
             --genomeDir "$GENOME_INDEX" \
             --genomeFastaFiles "$GENOME_FASTA" \
