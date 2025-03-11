@@ -2,7 +2,7 @@
 
 # Author: Carlos Camilleri-Robles
 # Contact: carloscamilleri@hotmail.com
-# Version: Not tested yet
+# Version: 11-03-2025
 # This script uses GNU Parallel and STAR to map paired-end reads to a reference genome
 
 #SBATCH --job-name=parastar       # Job name
@@ -27,6 +27,7 @@ GTF_DIR="Genomes/dm6/dmel-all-r6.62.gtf"
 OUTPUT_DIR="Results"
 NUM_FASTQ=$(find "$FASTQ_DIR" -name "*_R1_001.fastq.gz" | wc -l)
 THREADS=12
+READ_LEN=50
 
 ## Create output folder
 mkdir -p "$OUTPUT_DIR"
@@ -62,7 +63,8 @@ if [ ! -d "$GENOME_INDEX" ]; then
             --genomeDir "$GENOME_INDEX" \
             --genomeFastaFiles "$GENOME_FASTA" \
             --sjdbGTFfile "$GTF_DIR" \
-            --genomeSAindexNbases 12
+            --genomeSAindexNbases 12 \
+            --sjdbOverhang $((READ_LEN - 1))
 fi
 
 
@@ -101,7 +103,9 @@ mapping() {
                 --readFilesIn "$read1" "$read2" \
                 --readFilesCommand gunzip -c \
                 --outFileNamePrefix "$OUTPUT_DIR/${sample_id:0:5}_" \
-                --outSAMtype BAM SortedByCoordinate
+                --outSAMtype BAM SortedByCoordinate \
+                --outFilterMultimapNmax 10 \
+                --outFilterMismatchNoverLmax 0.05
     else
         echo "WARNING: No read2 file for $sample_id. Skipping sample..."
         return 1
