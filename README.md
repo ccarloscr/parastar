@@ -15,7 +15,6 @@ conda activate star_env
 Then, clone this repository:
 ```bash
 git clone https://github.com/ccarloscr/parastar.git
-cd parastar
 ```
 
 ### Download the fasta and gtf files of the reference genome
@@ -23,8 +22,8 @@ This script uses a reference genome to map fastq files, for which it needs the f
 
 Use the code below to download the fasta file of the dm6 genome from UCSC:
 ```bash
-mkdir -p Genomes/dm6
-cd Genomes/dm6
+mkdir -p parastar/Genomes/dm6
+cd parastar/Genomes/dm6
 wget http://hgdownload.soe.ucsc.edu/goldenPath/dm6/bigZips/dm6.fa.gz
 gunzip dm6.fa.gz
 ```
@@ -35,9 +34,9 @@ wget http://ftp.flybase.org/genomes/dmel/current/gtf/dmel-all-r6.62.gtf.gz
 gunzip dmel-all-r6.62.gtf.gz
 ```
 
-## Configuration
-The input .fastq files should be placed in a folder named fastq_files.
-
-
-
+### Folder containing input files
+Compressed fastq.gz input files should be located in a directory named fastq_files, within the parastar repository:
+```bash
+mkdir -p parastar/fastq_files
+```
 
