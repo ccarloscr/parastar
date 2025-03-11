@@ -1,7 +1,7 @@
 # parastar
 
 Bash script that uses GNU Parallel and STAR to map paired-end fastq.gz files to a reference transcriptome using STAR.
-The default parameters are defined for the _Drosophila melanogaster_ dm6-based r6.62 trasncriptome and may be changed for other species.
+The default parameters are defined for the _Drosophila melanogaster_ dm6-based r6.62 transcriptome and may be changed for other species.
 
 
 ## Installation
