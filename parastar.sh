@@ -104,6 +104,7 @@ mapping() {
                 --readFilesCommand gunzip -c \
                 --outFileNamePrefix "$OUTPUT_DIR/${sample_id:0:5}_" \
                 --outSAMtype BAM SortedByCoordinate \
+                --quantMode TranscriptomeSAM
                 --outFilterMultimapNmax 10 \
                 --outFilterMismatchNoverLmax 0.05
     else
