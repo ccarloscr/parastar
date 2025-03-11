@@ -61,7 +61,8 @@ if [ ! -d "$GENOME_INDEX" ]; then
             --runMode genomeGenerate \
             --genomeDir "$GENOME_INDEX" \
             --genomeFastaFiles "$GENOME_FASTA" \
-            --sjdbGTFfile "$GTF_DIR"
+            --sjdbGTFfile "$GTF_DIR" \
+            --genomeSAindexNbases 12
 fi
 
 
