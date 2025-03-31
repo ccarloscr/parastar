@@ -40,6 +40,7 @@ Compressed fastq.gz input files should be located in a directory named fastq_fil
 mkdir -p parastar/fastq_files
 ```
 The name of fastq.gz files should contain the sample name followed by __R1_001.fastq.gz_. If not, either change the file names or change parastar.sh line 29 accordingly.
+
 Read length is set at 50 bp. If not, change parastar-sh line 30 accordingly.
 
 
