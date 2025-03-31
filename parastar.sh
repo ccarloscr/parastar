@@ -15,7 +15,8 @@
 
 set -e
 
-## Activate conda environment
+## System set up
+source /etc/profile
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate star_env
 
