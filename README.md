@@ -43,6 +43,7 @@ mkdir -p parastar/fastq_files
 Each sample must have two files:
 - sampleID_R1_001.fastq.gz
 - sampleID_R2_001.fastq.gz
+
 Change the 001 numbers for different replicates, and the sampleID for different samples.
 
 ## Configuration
