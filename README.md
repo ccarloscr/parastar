@@ -38,9 +38,12 @@ Place your compressed paired-end FASTQ files inside the [fastq_files](fastq_file
 ```bash
 mkdir -p parastar/fastq_files
 ```
+
+#### Naming convention
 Each sample must have two files:
 - sampleID_R1_001.fastq.gz
 - sampleID_R2_001.fastq.gz
+Change the 001 numbers for different replicates, and the sampleID for different samples.
 
 ## Configuration
 - Read length: 50 bp → change line 30 in parastar.sh if needed.
@@ -48,3 +51,11 @@ Each sample must have two files:
 - Output directory: [Results](Results) (created automatically).
 
 
+## Notes
+- The script automatically adjusts thread usage based on the number of input files.
+- It modifies the GTF file to match chromosome naming conventions (adds chr prefix if needed).
+- Logs and warnings are printed for missing files or samples.
+
+
+## License
+This project is licensed under the MIT License.
