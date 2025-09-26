@@ -2,8 +2,9 @@
 
 # Author: Carlos Camilleri-Robles
 # Contact: carloscamilleri@hotmail.com
-# Version: 11-03-2025
-# This script uses GNU Parallel and STAR to map paired-end reads to a reference genome
+# Version: 26-09-2025
+# Description: Batch mapping of paired-end FASTQ files using STAR and GNU Parallel.
+# License: MIT License
 
 #SBATCH --job-name=parastar       # Job name
 #SBATCH --partition=irbio01       # Slurm queue
@@ -33,9 +34,13 @@ READ_LEN=50
 ## Create output folder
 mkdir -p "$OUTPUT_DIR"
 
-## Edit the gtf file to match with fasta chromosome naming
+## Create modified GTF with chr prefix if needed
+MODIFIED_GTF="$OUTPUT_DIR/dmel-all-r6.62.modified.gtf"
 if ! head -n 1 "$GTF_DIR" | awk '{print $1}' | grep -q '^chr'; then
-    sed -i 's/^\([^ ]*\)/chr\1/' "$GTF_DIR"
+    echo "Creating modified GTF with chr prefix..."
+    sed 's/^\([^ ]*\)/chr\1/' "$GTF_DIR" > "$MODIFIED_GTF"
+else
+    cp "$GTF_DIR" "$MODIFIED_GTF"
 fi
 
 
@@ -63,7 +68,7 @@ if [ ! -d "$GENOME_INDEX" ]; then
             --runMode genomeGenerate \
             --genomeDir "$GENOME_INDEX" \
             --genomeFastaFiles "$GENOME_FASTA" \
-            --sjdbGTFfile "$GTF_DIR" \
+            --sjdbGTFfile "$MODIFIED_GTF" \
             --genomeSAindexNbases 12 \
             --sjdbOverhang $((READ_LEN - 1))
 fi
@@ -103,7 +108,7 @@ mapping() {
                 --genomeDir "$GENOME_INDEX/" \
                 --readFilesIn "$read1" "$read2" \
                 --readFilesCommand gunzip -c \
-                --outFileNamePrefix "$OUTPUT_DIR/${sample_id:0:5}_" \
+                --outFileNamePrefix "$OUTPUT_DIR/${sample_id}_" \
                 --outSAMtype BAM SortedByCoordinate \
                 --quantMode TranscriptomeSAM \
                 --outFilterMultimapNmax 10 \
@@ -122,4 +127,8 @@ export FASTQ_DIR GENOME_INDEX OUTPUT_DIR threads_per_job
 
 ## Use Parallel for the mapping
 find "$FASTQ_DIR" -name "*_R1_001.fastq.gz" | parallel -j "$JOBS" mapping {} "$threads_per_job"
+
+
+echo "Mapping completed for all samples. Results saved in $OUTPUT_DIR."
+
 
