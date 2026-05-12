@@ -110,7 +110,7 @@ Parastar expects paired FASTQ files matching:
 
 These patterns are configurable via `R1_PATTERN` and `R2_PATTERN` in `parastar.conf`.
 
----
+
 
 ## Usage
 
@@ -132,7 +132,7 @@ bash parastar.sh parastar.conf
 
 Set `DRY_RUN=true` in `parastar.conf`, then run as above.
 
----
+
 
 ## Output
 
@@ -157,7 +157,6 @@ To inspect failed samples after a run:
 awk '$7 != 0' logs/parallel_joblog.tsv
 ```
 
----
 
 ## License
 
