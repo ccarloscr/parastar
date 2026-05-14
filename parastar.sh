@@ -102,6 +102,7 @@ validate_gzip_file() {
         if ! gzip -t "$file" 2>/dev/null; then
             log "WARNING: Corrupted gzip file, skipping: $file" >&2
             return 1
+        fi
     fi
 }
 
