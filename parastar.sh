@@ -57,16 +57,6 @@ validate_directory() {
     [[ -d "$1" ]] || error_exit "Missing directory: $1"
 }
 
-# Activate conda environment
-activate_conda() {
-    log "Activating conda environment: $CONDA_ENV_NAME"
-
-    validate_file "$CONDA_INIT_SCRIPT"
-
-    source "$CONDA_INIT_SCRIPT" || error_exit "Failed to source conda init: $CONDA_INIT_SCRIPT"
-    conda activate "$CONDA_ENV_NAME" || error_exit "Failed to activate conda env: $CONDA_ENV_NAME"
-}
-
 # Validate dependencies
 validate_dependencies() {
     log "Checking dependencies"
@@ -229,12 +219,11 @@ export -f error_exit
 
 main() {
     # Set up trap for cleanup on exit
-    trap 'log "Pipeline interrupted or finished. Cleaning up..."; rm -rf "$TMP_DIR"; conda deactivate 2>/dev/null || true' EXIT
-
+    trap 'log "Pipeline interrupted or finished. Cleaning up..."; rm -rf "$TMP_DIR"' EXIT
+    
     log "Starting Parastar"
     validate_resources
     prepare_directories
-    activate_conda
     validate_dependencies
     validate_inputs
     build_genome_index
