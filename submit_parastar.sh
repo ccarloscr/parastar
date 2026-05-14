@@ -13,4 +13,4 @@ sbatch \
   --time="$SBATCH_TIME" \
   --output="${LOG_DIR}/${SBATCH_OUTPUT}" \
   --error="${LOG_DIR}/${SBATCH_ERROR}" \
-  --wrap="./run_apptainer.sh parastar.conf"
+  --wrap="bash run_apptainer.sh parastar.conf"
