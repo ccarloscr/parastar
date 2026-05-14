@@ -1,8 +1,10 @@
 # parastar
 
-![Apptainer](https://img.shields.io/badge/Apptainer-Compatible-green?logo=apptainer)
-![Slurm](https://img.shields.io/badge/Workload-Slurm-blue?logo=linux)
-![Built with Apptainer](https://img.shields.io/badge/Built%20with-Apptainer-00599c?logo=apptainer&logoColor=white)
+[![Language: Bash](https://img.shields.io/badge/Language-Bash-4EAA25?logo=gnubash&logoColor=white)]()
+[![Scheduler: SLURM](https://img.shields.io/badge/Scheduler-SLURM-0067A5)]()
+[![Apptainer](https://img.shields.io/badge/Container-Apptainer-1d3557)]()
+[![STAR 2.7.11b](https://img.shields.io/badge/STAR-2.7.11b-blue)]()
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
 
 **Batch RNA-seq alignment using STAR and GNU Parallel**
 
