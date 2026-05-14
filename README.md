@@ -1,5 +1,9 @@
 # parastar
 
+![Apptainer](https://img.shields.io/badge/Apptainer-Compatible-green?logo=apptainer)
+![Slurm](https://img.shields.io/badge/Workload-Slurm-blue?logo=linux)
+![Built with Apptainer](https://img.shields.io/badge/Built%20with-Apptainer-00599c?logo=apptainer&logoColor=white)
+
 **Batch RNA-seq alignment using STAR and GNU Parallel**
 
 Parastar is a Bash pipeline for parallelised paired-end FASTQ mapping with [STAR](https://github.com/alexdobin/STAR). It handles genome index generation, sample discovery, and parallel alignment in a single configurable run, designed for HPC environments with SLURM.
@@ -9,6 +13,7 @@ Parastar is a Bash pipeline for parallelised paired-end FASTQ mapping with [STAR
 ## Features
 
 - Parallel alignment of multiple samples via GNU Parallel
+- Fully compatible with Apptainer/Singularity
 - Automatic genome index generation (with rebuild/skip logic)
 - Configurable via a single `.conf` file, no script editing needed
 - SLURM submission wrapper included
@@ -25,8 +30,8 @@ Parastar is a Bash pipeline for parallelised paired-end FASTQ mapping with [STAR
 parastar/
 ├── parastar.sh          # Main pipeline logic
 ├── parastar.conf        # User-editable configuration file
+├── run_apptainer.sh     # Apptainer container wrapper
 ├── submit_parastar.sh   # SLURM submission wrapper
-├── parastar_env.yaml    # Conda environment definition
 ├── README.md
 ├── CHANGELOG.md
 └── LICENSE
@@ -36,7 +41,7 @@ parastar/
 ## Requirements
 
 - Linux HPC with SLURM
-- Conda / Miniconda
+- Apptainer (formerly Singularity)
 - Reference genome in FASTA format
 - GTF annotation file
 
@@ -51,13 +56,12 @@ git clone https://github.com/ccarloscr/parastar.git
 cd parastar
 ```
 
-**2. Create the conda environment**
+**2. Get the Apptainer image**
 
 ```bash
-conda env create -f parastar_env.yaml
+# Download from Zenodo
+wget -O parastar.sif https://zenodo.org/records/20187976/files/parastar.sif
 ```
-
-This installs: `STAR 2.7.11b`, `parallel`, `pigz`, and `seqkit`.
 
 
 
@@ -72,8 +76,6 @@ All user-facing parameters are in `parastar.conf`. Edit this file before running
 | SLURM | `SBATCH_CPUS_PER_TASK` | Total CPUs requested |
 | SLURM | `SBATCH_MEM` | Memory per job |
 | SLURM | `SBATCH_TIME` | Wall time limit |
-| Conda | `CONDA_INIT_SCRIPT` | Path to your `conda.sh` init script |
-| Conda | `CONDA_ENV_NAME` | Name of the conda environment to activate |
 | Input | `FASTQ_DIR` | Directory containing paired FASTQ files |
 | Input | `GENOME_FASTA` | Path to reference genome FASTA |
 | Input | `GTF_FILE` | Path to GTF annotation file |
@@ -122,10 +124,10 @@ bash submit_parastar.sh
 
 This submits `parastar.sh` as a SLURM job using the parameters defined in `parastar.conf`.
 
-### Locally
+### Locally via container
 
 ```bash
-bash parastar.sh parastar.conf
+bash run_apptainer.sh parastar.conf
 ```
 
 ### Dry run (test config without mapping)
